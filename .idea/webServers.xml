@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="96230ac7-0203-464d-a5e3-a0e8dcf72710" name="arkotik::prism-carousel" url="http://arkotik.com.ua/playground/prism-carousel">
+        <fileTransfer rootFolder="/data/arkotik/www/playground/prism-carousel" accessType="SFTP" host="arkotik.com.ua" port="22" sshConfigId="083fdd5e-4cc6-4088-905a-a0f8c3213f35" sshConfig="arkotik@arkotik.com.ua:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" isUseRsync="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

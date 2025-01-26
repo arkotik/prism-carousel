@@ -1,0 +1,132 @@
+@use "sass:math";
+
+*, :before, :after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1000px;
+  background: radial-gradient(transparent 0%, gray 15vw, black 80vw);
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .scene {
+    --scene-width: 360;
+    --scene-height: 450;
+    --r-inner: 0;
+    --rot-angle: 0;
+    --animation-duration: 1000;
+    --animation-timing-func: ease-in-out;
+    perspective: 1000px;
+    min-width: calc(var(--scene-width) * 1px);
+    min-height: calc(var(--scene-height) * 1px);
+    width: 100%;
+    //overflow: hidden;
+    //width: calc(var(--scene-width) * 1px);
+
+    &.perspective-view {
+      transform: scale(0.7) translateY(100px) rotate3d(1, 0, 0, -31deg);
+      transform-style: preserve-3d;
+    }
+
+    &.backface-visible {
+      .prism {
+        .slide {
+          backface-visibility: visible !important;
+        }
+      }
+    }
+
+    .prism {
+      width: calc(var(--scene-width) * 1px);
+      height: calc(var(--scene-height) * 1px);
+      position: relative;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      transform:  translate3d(0, 0, calc(var(--r-inner) * -1px)) rotateY(calc(var(--rot-angle, 0) * 1deg));
+      transition: transform calc(var(--animation-duration) * 1ms) var(--animation-timing-func);
+      margin: 0 auto;
+
+      &.off-animation {
+        transition: none;
+      }
+
+      .slide {
+        backface-visibility: hidden;
+        position: absolute;
+        left: 0;
+        opacity: 1;
+      }
+
+      &.use-bg .slide {
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: contain;
+        transform-style: preserve-3d;
+
+        &:before {
+          backface-visibility: hidden;
+          content: '';
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          background-image: linear-gradient(45deg, #ffffff, #d1d1d1, #ffffff);
+          position: absolute;
+          transform: translate3d(0px, 0px, -0.1px);
+        }
+      }
+    }
+  }
+
+  .controls {
+    position: relative;
+    padding: 10px 0;
+    display: flex;
+    gap: 10px;
+    width: 360px;
+
+    .btn {
+      padding: 5px 10px;
+      flex-basis: 50%;
+      cursor: pointer;
+
+      &--prev {
+      }
+
+      &--next {
+      }
+    }
+  }
+
+  .flags {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 0.5rem;
+
+    label {
+      text-shadow: 1px 1px 4px #000000;
+      color: #d7d7d7;
+    }
+  }
+}
